@@ -4,15 +4,15 @@ local StarterGui = game:GetService("StarterGui")
 -- Hier speichern wir alle unterstützten Spiele ab
 local SupportedGames = {
     
-    -- Dein erstes Spiel
+    --  (Lift Rock)
     [102555956950143] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/1liftrock.lua"))()
     end,
     
-    -- Beispiel, wie du später ein weiteres Spiel hinzufügst:
-    -- [123456789] = function()
-    --     loadstring(game:HttpGet("https://deine-url-hier.lua"))()
-    -- end,
+    -- Millionaire Empire Tycoon
+    [6677985923] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/millionaireempiretycoon.lua"))()
+    end,
 
 }
 
