@@ -14,6 +14,11 @@ local SupportedGames = {
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/millionaireempiretycoon.lua"))()
     end,
 
+      -- lucky block battlegrounds
+    [662417684] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/luckyblockbattlegrounds.lua"))()
+    end,
+
 }
 
 -- Prüfen, ob die aktuelle PlaceID in unserer Liste existiert
