@@ -1,10 +1,9 @@
 local PlaceID = game.PlaceId
-local StarterGui = game:GetService("StarterGui")
+local CoreGui = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
 -- Hier speichern wir alle unterstützten Spiele ab
 local SupportedGames = {
-    
-    --  (Lift Rock)
+    -- (Lift Rock)
     [102555956950143] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/1liftrock.lua"))()
     end,
@@ -14,36 +13,117 @@ local SupportedGames = {
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/millionaireempiretycoon.lua"))()
     end,
 
-      -- lucky block battlegrounds
+    -- lucky block battlegrounds
     [662417684] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/luckyblockbattlegrounds.lua"))()
     end,
-
 }
+
+--==================================================
+-- Dev Version Prompt GUI
+--==================================================
+
+local function ShowDevVersionPrompt()
+    -- Erstelle das GUI
+    local PromptGui = Instance.new("ScreenGui")
+    PromptGui.Name = "GustavDevPrompt"
+    PromptGui.ResetOnSpawn = false
+    PromptGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    PromptGui.Parent = CoreGui
+    
+    -- Hauptfenster
+    local Main = Instance.new("Frame")
+    Main.Size = UDim2.fromOffset(360, 180)
+    Main.Position = UDim2.new(0.5, -180, 0.5, -90)
+    Main.BackgroundColor3 = Color3.fromRGB(24, 24, 32)
+    Main.BorderSizePixel = 0
+    Main.Parent = PromptGui
+    
+    local Corner = Instance.new("UICorner")
+    Corner.CornerRadius = UDim.new(0, 12)
+    Corner.Parent = Main
+    
+    -- Titel
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, 0, 0, 40)
+    Title.Position = UDim2.fromOffset(0, 10)
+    Title.BackgroundTransparency = 1
+    Title.Text = "Gustav Client"
+    Title.TextColor3 = Color3.fromRGB(245, 245, 250)
+    Title.Font = Enum.Font.GothamBold
+    Title.TextSize = 22
+    Title.Parent = Main
+    
+    -- Beschreibungstext
+    local Desc = Instance.new("TextLabel")
+    Desc.Size = UDim2.new(1, -40, 0, 50)
+    Desc.Position = UDim2.fromOffset(20, 50)
+    Desc.BackgroundTransparency = 1
+    Desc.Text = "This game is not supported.\nDo you wanna load the dev version?"
+    Desc.TextColor3 = Color3.fromRGB(210, 210, 220)
+    Desc.Font = Enum.Font.GothamMedium
+    Desc.TextSize = 15
+    Desc.TextWrapped = true
+    Desc.Parent = Main
+    
+    -- Yes Button
+    local YesBtn = Instance.new("TextButton")
+    YesBtn.Size = UDim2.new(0.5, -30, 0, 42)
+    YesBtn.Position = UDim2.fromOffset(20, 115)
+    YesBtn.BackgroundColor3 = Color3.fromRGB(55, 170, 80)
+    YesBtn.BorderSizePixel = 0
+    YesBtn.Text = "Yes"
+    YesBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    YesBtn.Font = Enum.Font.GothamBold
+    YesBtn.TextSize = 15
+    YesBtn.AutoButtonColor = false
+    YesBtn.Parent = Main
+    
+    local YesCorner = Instance.new("UICorner")
+    YesCorner.CornerRadius = UDim.new(0, 8)
+    YesCorner.Parent = YesBtn
+    
+    -- No Button
+    local NoBtn = Instance.new("TextButton")
+    NoBtn.Size = UDim2.new(0.5, -30, 0, 42)
+    NoBtn.Position = UDim2.new(0.5, 10, 0, 115)
+    NoBtn.BackgroundColor3 = Color3.fromRGB(170, 55, 65)
+    NoBtn.BorderSizePixel = 0
+    NoBtn.Text = "No"
+    NoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    NoBtn.Font = Enum.Font.GothamBold
+    NoBtn.TextSize = 15
+    NoBtn.AutoButtonColor = false
+    NoBtn.Parent = Main
+    
+    local NoCorner = Instance.new("UICorner")
+    NoCorner.CornerRadius = UDim.new(0, 8)
+    NoCorner.Parent = NoBtn
+    
+    -- Button Logik
+    YesBtn.Activated:Connect(function()
+        PromptGui:Destroy()
+        -- Lädt die Dev Version
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/gch.dev.lua"))()
+    end)
+    
+    NoBtn.Activated:Connect(function()
+        -- Schließt einfach das Fenster
+        PromptGui:Destroy()
+    end)
+end
+
+--==================================================
+-- Ausführung
+--==================================================
 
 -- Prüfen, ob die aktuelle PlaceID in unserer Liste existiert
 if SupportedGames[PlaceID] then
-    
     -- Wenn ja: Führe das entsprechende Script aus
     print("Gustav Client: Game supported! Loading script...")
     SupportedGames[PlaceID]()
-    
 else
-    
-    -- Wenn nein: Zeige Fehler an
-    local errorMessage = "This game is not supported! (Place ID: " .. tostring(PlaceID) .. ")"
-    
-    -- Warnung in der F9 Konsole ausgeben
-    warn("Gustav Client: " .. errorMessage)
-    
-    -- In-Game Notification senden (mit pcall, falls StarterGui noch nicht ganz geladen ist)
-    pcall(function()
-        StarterGui:SetCore("SendNotification", {
-            Title = "Gustav Client",
-            Text = "This game is not supported!",
-            Icon = "rbxassetid://1", -- Optionales leeres Icon
-            Duration = 10 -- Bleibt 10 Sekunden auf dem Bildschirm
-        })
-    end)
-    
+    -- Wenn nein: Warnung ausgeben und Dev Prompt anzeigen
+    warn("Gustav Client: This game is not supported! (Place ID: " .. tostring(PlaceID) .. ")")
+    ShowDevVersionPrompt()
 end
