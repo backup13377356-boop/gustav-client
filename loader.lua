@@ -192,6 +192,11 @@ local SupportedGames = {
     [662417684] = function()
         ShowLuckyBlockVersionPrompt()
     end,
+
+    -- Rivals
+    [17625359962] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/KiciaHookHub_Rivals.lua"))()
+    end,
 }
 
 --==================================================
@@ -200,13 +205,18 @@ local SupportedGames = {
 
 -- DOORS universell erkennen (über GameID oder GameData in ReplicatedStorage)
 local isDoors = (game.GameId == 3351636250) or ReplicatedStorage:FindFirstChild("GameData")
+local isRivals = (game.GameId == 6035872082) -- Rivals Game ID Fallback
 
 if isDoors then
     print("Gustav Client: DOORS detected! Loading script...")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/doors.lua"))()
-elseif SupportedGames[PlaceID] then
+elseif isRivals or SupportedGames[PlaceID] then
     print("Gustav Client: Game supported! Loading script...")
-    SupportedGames[PlaceID]()
+    if isRivals and not SupportedGames[PlaceID] then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/KiciaHookHub_Rivals.lua"))()
+    else
+        SupportedGames[PlaceID]()
+    end
 else
     warn("Gustav Client: This game is not supported! (Place ID: " .. tostring(PlaceID) .. ")")
     ShowDevVersionPrompt()
