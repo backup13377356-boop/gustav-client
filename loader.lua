@@ -203,6 +203,11 @@ local SupportedGames = {
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/wings_brainrot.lua"))()
     end,
 
+    -- fall for shit brainrots just tp script its ass ngl
+    [86368783421928] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/fall-for-brainrots.lua"))()
+    end,
+
     -- 99 Nights Helper
     [79546208627805] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/99.lua"))()
