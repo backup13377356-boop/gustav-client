@@ -11,3 +11,11 @@ Millionaire-Empire-Tycoon
 1-Lift-Rock-for-Treasure
 
 DOORS
+
+
+brainrot shit games:
+
++1 wings for brainrots
+
+
+other: if the game is not supportet u can load the dev version
