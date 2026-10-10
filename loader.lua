@@ -1,5 +1,6 @@
 local PlaceID = game.PlaceId
 local CoreGui = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 --==================================================
 -- Lucky Block Version Prompt GUI
@@ -197,7 +198,13 @@ local SupportedGames = {
 -- Ausführung
 --==================================================
 
-if SupportedGames[PlaceID] then
+-- DOORS universell erkennen (über GameID oder GameData in ReplicatedStorage)
+local isDoors = (game.GameId == 3351636250) or ReplicatedStorage:FindFirstChild("GameData")
+
+if isDoors then
+    print("Gustav Client: DOORS detected! Loading script...")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/doors.lua"))()
+elseif SupportedGames[PlaceID] then
     print("Gustav Client: Game supported! Loading script...")
     SupportedGames[PlaceID]()
 else
