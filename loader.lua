@@ -197,6 +197,11 @@ local SupportedGames = {
     [17625359962] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/KiciaHookHub_Rivals.lua"))()
     end,
+
+    -- Wings & Brainrot / Cosmic Game
+    [84332574190497] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/wings_brainrot.lua"))()
+    end,
 }
 
 --==================================================
