@@ -202,23 +202,31 @@ local SupportedGames = {
     [84332574190497] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/wings_brainrot.lua"))()
     end,
+
+    -- 99 Nights Helper
+    [79546208627805] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/99.lua"))()
+    end,
 }
 
 --==================================================
 -- Ausführung
 --==================================================
 
--- DOORS universell erkennen (über GameID oder GameData in ReplicatedStorage)
+-- Universelle Erkennung für Spiele (wie DOORS / 99 Nights)
 local isDoors = (game.GameId == 3351636250) or ReplicatedStorage:FindFirstChild("GameData")
 local isRivals = (game.GameId == 6035872082) -- Rivals Game ID Fallback
+local is99 = (game.PlaceId == 79546208627805) or ReplicatedStorage:FindFirstChild("RemoteEvents")
 
 if isDoors then
     print("Gustav Client: DOORS detected! Loading script...")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/doors.lua"))()
-elseif isRivals or SupportedGames[PlaceID] then
+elseif isRivals or is99 or SupportedGames[PlaceID] then
     print("Gustav Client: Game supported! Loading script...")
     if isRivals and not SupportedGames[PlaceID] then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/main/KiciaHookHub_Rivals.lua"))()
+    elseif is99 and not SupportedGames[PlaceID] then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/99.lua"))()
     else
         SupportedGames[PlaceID]()
     end
