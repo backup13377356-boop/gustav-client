@@ -214,7 +214,7 @@ local SupportedGames = {
     end,
 
     -- fucking hypercock
-    [80234914611737] = function()
+    [175165961187] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/hypercock.lua"))()
     end,
 
