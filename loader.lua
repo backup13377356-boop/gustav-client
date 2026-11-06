@@ -213,6 +213,11 @@ local SupportedGames = {
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/jetpack-brainrot-shit.lua"))()
     end,
 
+    -- fucking hypercock
+    [80234914611737] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/hypercock.lua"))()
+    end,
+
     -- 99 Nights Helper
     [79546208627805] = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/backup13377356-boop/gustav-client/refs/heads/main/99.lua"))()
